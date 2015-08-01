@@ -60,7 +60,7 @@ mlr_results <- runmlrbmamodel(responsevar = "diagnosis_simple_code",
                               regdata = regmatrix_diagnoses)
 
 
-##### 5. Run BMA linear regression model for checking association of microbiome diversity with therapy #####
+##### 4. Run BMA linear regression model for checking association of microbiome diversity with therapy #####
 runlinearbma <- function(regmatrix, bmaiterations) {
     ## Eliminate variables that are zero throughout or have a constant value in all columns.
     zeroes <- which(sapply(colnames(regmatrix), function(cname) {
