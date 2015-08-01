@@ -62,7 +62,7 @@ names(diaglabels) <- c("b20", "b10", "b21")
 plotbmaoverview <- function(mlr_plottingdata) {
     allmlrdatacombined <- ldply(mlr_plottingdata)
     allmlrdatacombined$facetcontrast <- diaglabels[allmlrdatacombined$.id]
-    plottingdata <- allmlrdatacombined[which(is.na(allmlrdatacombined$welch) == F), 
+    plottingdata <- allmlrdatacombined[which(is.na(allmlrdatacombined$welch) == F),
         ]
     maxpip <- max(plottingdata$ipcent)
     maxwelch <- max(plottingdata$welch)
@@ -94,8 +94,8 @@ plotbmaoverview <- function(mlr_plottingdata) {
 plotbmaoverview(mlr_plottingdata = mlr_plottingdata)
 
 ##### 4. Plot microbiome signatures #####
-plotmicrobiomesignature <- function(plottingdata, plainorpolar, ordermicro, pipcutoff, 
-    contrastname) {
+plotmicrobiomesignature <- function(plottingdata, plainorpolar, ordermicro,
+                                    pipcutoff, contrastname) {
     plottingdata <- data.table(plottingdata)
     ## get the sign to apply colour coding
     plottingdata[, `:=`(signwelchplot, sign(x = as.numeric(welch))), ]
@@ -104,7 +104,7 @@ plotmicrobiomesignature <- function(plottingdata, plainorpolar, ordermicro, pipc
     ## limit the variables to all microbes
     datamerge <- merge(plottingdata, ordermicro, by = "variable")
     datamerge[, `:=`(welch, ifelse(is.na(welch), 0, welch)), ]
-    datamerge[, `:=`(newvar, paste(sprintf("%03d", ordernum), variable, sep = "_")), 
+    datamerge[, `:=`(newvar, paste(sprintf("%03d", ordernum), variable, sep = "_")),
         ]
     ## limit to increased odds of a particular response (positive odds)
     megdata <- subset(x = datamerge, signbetax == 1 | is.na(signbetax))
@@ -131,7 +131,7 @@ plotmicrobiomesignature <- function(plottingdata, plainorpolar, ordermicro, pipc
     megsub <- megsub[sig == "sig"]
     p <- ggplot(megsub, aes(y = welchrescale, x = newvar, fill = posneg))
     p <- p + geom_bar(stat = "identity")
-    p <- p + scale_fill_manual(values = posneg)
+    p <- p + scale_fill_manual(values = posnegcolour)
     p <- p + ylab("") + xlab("")
     p <- p + lightertheme
     p <- p + guides(colour = F, fill = F)
@@ -176,7 +176,7 @@ plotmicrobiomesignature(plottingdata = mlr_plottingdata$b10,
 
 ##### 4. Plot cytokine signatures #####
 ## Limits for the barplot
-alldt <- data.table(allmlrdatacombined)
+alldt <- data.table(ldply(mlr_plottingdata))
 maxcytokine <- max(alldt[group == "Cytokine", welch, ])
 mincytokine <- min(alldt[group == "Cytokine", welch, ])
 
@@ -189,7 +189,7 @@ plotcytobarplot <- function(plottingdata, ordercyto, contrastname) {
     ## limit the variables to all microbes
     datamerge <- merge(plottingdata, ordercyto, by = "variable", all.y = T)
     datamerge[, `:=`(welch, ifelse(is.na(welch), 0, welch)), ]
-    datamerge[, `:=`(newvar, paste(sprintf("%02d", ordernum), variable, sep = "_")), 
+    datamerge[, `:=`(newvar, paste(sprintf("%02d", ordernum), variable, sep = "_")),
         ]
     ## limit to increased odds of a particular response (positive odds)
     megdata <- subset(x = datamerge, signbetax == 1 | is.na(signbetax))
@@ -199,7 +199,7 @@ plotcytobarplot <- function(plottingdata, ordercyto, contrastname) {
     megsub <- megdata[sig == "sig"]
     p <- ggplot(megsub, aes(y = welch, x = newvar, fill = posneg))
     p <- p + geom_bar(stat = "identity")
-    p <- p + scale_fill_manual(values = posneg)
+    p <- p + scale_fill_manual(values = posnegcolour)
     p <- p + ylab("Mean difference in\nlevels across groups") + xlab("")
     p <- p + lightertheme
     p <- p + guides(colour = F, fill = F)
@@ -210,11 +210,11 @@ plotcytobarplot <- function(plottingdata, ordercyto, contrastname) {
                    strip.text.x = element_blank(), axis.title.x = element_blank(),
                    panel.margin = unit(0.5, "lines"))
     p <- p + ylim(c(mincytokine, maxcytokine))
-    ## Coord_equal adjusts the height of the graph according to the calculated width
-    ## above
+    ## Coord_equal adjusts the height of the graph according to
+    ## the calculated width above
     p <- p + coord_equal(1)
-    ## Note: Greek expressions will only work if run as a function. ggsave inherits the
-    ## Greek labels.
+    ## Note: Greek expressions will only work if run as a function.
+    ## ggsave inherits the Greek labels.
     p <- p + scale_x_discrete(labels = c(`19_FGF_basic_sn` = "FGF basic",
                                          `01_Eotaxin_sn` = "Eotaxin",
                                          `17_G_CSF_sn` = "G-CSF",
@@ -258,4 +258,4 @@ plotcytobarplot(plottingdata = mlr_plottingdata$b10, ordercyto = ordercyto, cont
 ## ./output/lungbiome_pneumonia_col_microbiome_signature_polarplot.pdf (Figure 3A)
 ## ./output/lungbiome_pneumonia_col_microbiome_signature_polarplot.pdf (Figure 3B)
 ## ./output/lungbiome_pneumonia_col_cytokine_signature.pdf (Figure 3C)
-## ./output/lungbiome_tracheobronchitis_col_cytokine_signature.pdf (Figure 3D) 
+## ./output/lungbiome_tracheobronchitis_col_cytokine_signature.pdf (Figure 3D)
