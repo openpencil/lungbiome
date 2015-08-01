@@ -38,11 +38,6 @@ installloadpkgs <- function(pkgs) {
     } else if (length(pkgs_miss) == 0) {
         message("\n ...Packages were already installed!\n")
     }
-    ## install packages not already loaded:
-    pkgs_miss <- pkgs[which(!pkgs %in% installed.packages()[, 1])]
-    if (length(pkgs_miss) > 0) {
-        install.packages(pkgs_miss)
-    }
     ## load packages not already loaded:
     attached <- search()
     attached_pkgs <- attached[grepl("package", attached)]
@@ -59,8 +54,8 @@ installloadpkgs <- function(pkgs) {
 }
 
 ##### 2. Global library options #####
-installloadpkgs(c("rlecuyer", "ggplot2", "reshape", "scales", "plyr", "RColorBrewer", 
-    "data.table", "grid", "parallel"))
+installloadpkgs(c("rlecuyer", "ggplot2", "reshape", "scales", "plyr",
+                  "RColorBrewer", "data.table", "grid", "parallel"))
 
 # Sets the random number generator
 RNGkind("L'Ecuyer-CMRG")
