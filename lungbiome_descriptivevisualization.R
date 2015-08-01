@@ -135,6 +135,8 @@ plotstackedhistograms <- function(dataforplotting, diagnosisgroup, makelegend) {
 }
 
 ## Function for making diversity panels ##
+maxsimpson <- ceiling(max(countmatrix$invsimpson))
+
 plotdiversitypanels <- function(dataforplotting, diagnosisgroup) {
     ## For the line to join points across categorical variables,
     ## x axis needs to be numeric (or continuous)
@@ -144,9 +146,9 @@ plotdiversitypanels <- function(dataforplotting, diagnosisgroup) {
         p <- p + geom_point(colour = "#2C5777")
         p <- p + geom_line(guide = F, colour = "#2C5777")
         p <- p + coord_equal(0.254)
-        p <- p + scale_x_discrete(labels = sort(unique(ggmelt$timesinceltx)))
+        p <- p + scale_x_discrete(labels = sort(unique(patientdata$timesinceltx)))
         p <- p + scale_y_continuous(breaks = c(5, 10),
-                                    limits = c(0, max(datacount$invsimpson)),
+                                    limits = c(0, cmaxsimpson),
                                     labels = c(5, 10))
         p <- p + lightertheme
         p <- p + theme(axis.text.x = element_blank(),
@@ -183,4 +185,4 @@ sapply(names(patientsets), function(diagnosisgroupname) {
 ## ./output/lungbiome_diversitypanel_P{patient_number}_Colonization.pdf (Figure 1C, diversity panels)
 ## ./output/lungbiome_stackedhistogram_Pneumonia.pdf (Figure 1A, Microbiome stacked histograms)
 ## ./output/lungbiome_stackedhistogram_Tracheobronchitis.pdf (Figure 1B, Microbiome stacked histograms)
-## ./output/lungbiome_stackedhistogram_Colonization.pdf (Figure 1C, Microbiome stacked histograms) 
+## ./output/lungbiome_stackedhistogram_Colonization.pdf (Figure 1C, Microbiome stacked histograms)
