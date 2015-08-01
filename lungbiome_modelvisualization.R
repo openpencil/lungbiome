@@ -174,7 +174,8 @@ plotmicrobiomesignature(plottingdata = mlr_plottingdata$b10,
 ## Ignore this message Warning message: In loop_apply(n, do.ply) : Stacking not
 ## well defined when ymin != 0
 
-##### 4. Plot cytokine signatures ##### Limits for the barplot
+##### 4. Plot cytokine signatures #####
+## Limits for the barplot
 alldt <- data.table(allmlrdatacombined)
 maxcytokine <- max(alldt[group == "Cytokine", welch, ])
 mincytokine <- min(alldt[group == "Cytokine", welch, ])
