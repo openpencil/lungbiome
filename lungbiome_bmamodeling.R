@@ -36,6 +36,7 @@
 dir.create("./output", showWarnings = T, recursive = T)
 
 ##### 2. Load algorithms and project data #####
+source(file = "./lungbiome_utilities.R")
 source(file = "./lungbiome_algorithms.R")
 source(file = "./lungbiome_loadprojectdata.R")
 
@@ -53,9 +54,8 @@ runmlrbmamodel <- function(responsevar, bmaiterations, regdata) {
         seed = 101)
     ## Save the model results
     saveRDS(object = bmaresults, file = "./output/lungbiome_MLR_diagnoses.RDS")
-    return(outlist)
 }
-mlr_results <- runmlrbmamodel(responsevar = "diagnosis_simple_code",
+runmlrbmamodel(responsevar = "diagnosis_simple_code",
                               bmaiterations = 80000,
                               regdata = regmatrix_diagnoses)
 
@@ -77,9 +77,8 @@ runlinearbma <- function(regmatrix, bmaiterations) {
                           modelsizearray = c(1, 3, 5), iter = bmaiterations, seed = 101)
     ## Save the model results
     saveRDS(object = bmaresults, file = "./output/lungbiome_linearreg_therapy.RDS")
-    return(bmaout)
 }
-linearregresults <- runlinearbma(regmatrix = regmatrix_therapy, bmaiterations = 80000)
+runlinearbma(regmatrix = regmatrix_therapy, bmaiterations = 80000)
 
 
 ## At the end of this script, you should have the following files:
