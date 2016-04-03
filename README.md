@@ -14,19 +14,11 @@ Citing `lungbiome`
 BibTeX
 ```bibtex
 
-@ARTICLE{Shankar2015-mi,
+@ARTICLE{Shankar2015Looking,
   title     = "Looking beyond respiratory cultures: Microbiome-cytokine
                signatures of bacterial pneumonia and tracheobronchitis in lung
                transplant recipients",
-  author    = "Shankar, Jyoti and Nguyen, M Hong and Crespo, Maria M and Kwak,
-               Eun J and Lucas, Sarah K and McHugh, Kevin J and Mounaud,
-               Stephanie and Alcorn, John F and Pilewski, Joseph M and
-               Shigemura, Norihisa and {Others}",
-  abstract  = "Abstract Bacterial pneumonia and tracheobronchitis are diagnosed
-               frequently following lung transplantation. The diseases share
-               clinical signs of inflammation and are often difficult to
-               differentiate based on culture results. Microbiome and host
-               immune response signatures ...",
+  author    = "Shankar, Jyoti et al.",
   journal   = "American journal of transplantation: official journal of the
                American Society of Transplantation and the American Society of
                Transplant Surgeons",
@@ -36,6 +28,3 @@ BibTeX
   issn      = "1600-6135"
 }
 ```
-<!--Websites-->
-[mainsite]: http://openpencil.github.io/bayesianmice/ "_bayesianmice_: project documentation website"
-[results]: http://openpencil.github.io/bayesianmice/results.html "_bayesianmice_: Results"
