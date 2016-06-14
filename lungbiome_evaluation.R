@@ -1,7 +1,9 @@
 #*****************************************************************************************************
 ##  For complete background and details, please refer to:
-##  Shankar, J. et al. Microbiome and cytokine signatures of bacterial pneumonia
-##  and tracheobronchitis.(Manuscript under review) (2015).
+##  Shankar J. et al. Looking beyond respiratory cultures: Microbiome-cytokine signatures of bacterial
+##  pneumonia and tracheobronchitis in lung transplant recipients. Am J Transplant. Wiley Online Library;
+##  2015; Available from: http://dx.doi.org/10.1111/ajt.13676
+##
 ##
 ##  Modeling and visualization was performed under the following environment:
 ##
@@ -125,7 +127,7 @@ calculateauc <- function(mlr_model_data, betacoefficients, thresholdinterval) {
     ## strip out the numbers and make names similar
     names(betaint1) <- gsub(":\\d{1}", "", names(betaint1))
     names(betaint2) <- gsub(":\\d{1}", "", names(betaint2))
-    
+
     ## compute auc for each contrast in the models
     sapply(c("pc", "tc", "pt"), function(whichcontrast) {
         if (whichcontrast == "pc") {
@@ -145,14 +147,14 @@ calculateauc <- function(mlr_model_data, betacoefficients, thresholdinterval) {
             ydata <- response_y[rowint]
             diagnosis_interest <- which(ydata == max(ydata))
             diagnosis_reference <- which(ydata == min(ydata))
-            
+
             ## calculate log odds of the response
             betax <- as.matrix(xdata[, names(betaint)]) %*% as.matrix(betaint)
-            
+
             ## Convert logit to probability
             probresponse <- plogis(betax)
             equallyspacedxaxis <- seq(from = 0, to = 1, by = thresholdinterval)
-            
+
             ## calculate metrics at each give probability threshold
             metrics <- sapply(rev(equallyspacedxaxis), function(thresholdp) {
                 ## falsepositive belongs to the diagnosis_reference group but has been falsely
@@ -177,7 +179,7 @@ calculateauc <- function(mlr_model_data, betacoefficients, thresholdinterval) {
                 ## x=fpr, y=tpr
                 ## since we are moving in the opposite direction of the x-axis,
                 ## using TNR instead of FPR (note: TNR is the complement of FPR)
-                auc <- 0.5 * abs((metrics["TNR", colindex] - metrics["TNR", colindex - 
+                auc <- 0.5 * abs((metrics["TNR", colindex] - metrics["TNR", colindex -
                   1]) * (metrics["TPR", colindex] + metrics["TPR", colindex - 1]))
             })
             aucvalue <- sum(calcauc)
@@ -270,4 +272,4 @@ plotroc <- function(aucplottingdata) {
            width = 5, height = 5, units = "in", limitsize = F)
 }
 
-plotroc(aucplottingdata = aucdata) 
+plotroc(aucplottingdata = aucdata)

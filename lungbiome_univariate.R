@@ -1,7 +1,9 @@
 ##*****************************************************************************************************
 ##  For complete background and details, please refer to:
-##  Shankar, J. et al. Microbiome and cytokine signatures of bacterial pneumonia
-##  and tracheobronchitis.(Manuscript under review) (2015).
+##  Shankar J. et al. Looking beyond respiratory cultures: Microbiome-cytokine signatures of bacterial
+##  pneumonia and tracheobronchitis in lung transplant recipients. Am J Transplant. Wiley Online Library;
+##  2015; Available from: http://dx.doi.org/10.1111/ajt.13676
+##
 ##
 ##  Analysis was performed under the following environment:
 ##

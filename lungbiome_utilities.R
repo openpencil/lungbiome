@@ -1,7 +1,9 @@
 #*****************************************************************************************************
 ##  For complete background and details, please refer to:
-##  Shankar, J. et al. Microbiome and cytokine signatures of bacterial pneumonia
-##  and tracheobronchitis.(Manuscript under review) (2015).
+##  Shankar J. et al. Looking beyond respiratory cultures: Microbiome-cytokine signatures of bacterial
+##  pneumonia and tracheobronchitis in lung transplant recipients. Am J Transplant. Wiley Online Library;
+##  2015; Available from: http://dx.doi.org/10.1111/ajt.13676
+##
 ##
 ##  Modeling and visualization was performed under the following environment:
 ##
@@ -132,7 +134,7 @@ getclusternum <- function(colofint) {
 
 ##### 4. Rescaling functions #####
 ourrescale <- function(x, to = c(0, 1), from = range(x, na.rm = TRUE)) {
-    if (zero_range(from) || zero_range(to)) 
+    if (zero_range(from) || zero_range(to))
         return(x)
     out <- (x - from[1])/diff(from) * diff(to) + to[1]
 }
@@ -217,4 +219,4 @@ convertlogittoprob <- function(inputlogit) {
     odds <- exp(inputlogit)
     prob <- odds/(odds + 1)
     return(prob)
-} 
+}

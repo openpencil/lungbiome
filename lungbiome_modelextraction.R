@@ -1,7 +1,9 @@
 ##*****************************************************************************************************
 ##  For complete background and details, please refer to:
-##  Shankar, J. et al. Microbiome and cytokine signatures of bacterial pneumonia
-##  and tracheobronchitis.(Manuscript under review) (2015).
+##  Shankar J. et al. Looking beyond respiratory cultures: Microbiome-cytokine signatures of bacterial
+##  pneumonia and tracheobronchitis in lung transplant recipients. Am J Transplant. Wiley Online Library;
+##  2015; Available from: http://dx.doi.org/10.1111/ajt.13676
+##
 ##
 ##  Modeling was performed under the following environment:
 ##
@@ -153,11 +155,11 @@ extract_linearreg_results <- function(listofmodels, getmodeldiagnostics) {
                 betacizero <- quantile(x = betavector, probs = c(0.025, 0.5, 0.975))
                 inclprob <- probcoeff[var, "inc.prob"]
                 out <- c(betaci, inclprob, betacizero)
-                names(out) <- c("lowerci", "median", "upperci", "pip", "lowerci_z", 
+                names(out) <- c("lowerci", "median", "upperci", "pip", "lowerci_z",
                   "median_z", "upperci_z")
                 return(out)
             })
-            summarydata <- data.table(t(getci), colnames(getci), rep(filenamestring, 
+            summarydata <- data.table(t(getci), colnames(getci), rep(filenamestring,
                 ncol(getci)))
             setnames(summarydata, colnames(summarydata)[c(8, 9)], c("variable", "filename"))
             summarydata$ems <- cvems
@@ -180,4 +182,4 @@ saveRDS(object = linearreg_therapy_results, file = "./output/lungbiome_linearreg
 ## ./output/lungbiome_linearreg_therapy_diagnostics.RDS
 ## ./output/lungbiome_linearreg_therapy_results.RDS
 
-##### Next script: lungbiome_modelvisualization.R ###### 
+##### Next script: lungbiome_modelvisualization.R ######
